@@ -17,22 +17,22 @@ const NavBar = () => {
       .catch((error) => console.log(error));
   };
 
-  useEffect(() => {
-    fetch(`http://localhost:5000/checkUser/${user?.email}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        const { role } = data;
-        setUserRole(role);
-      })
-      .catch((error) => {
-        console.error("Error fetching user role:", error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch(`http://localhost:5000/checkUser/${user?.email}`)
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error(`HTTP error! status: ${response.status}`);
+  //       }
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       const { role } = data;
+  //       setUserRole(role);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching user role:", error);
+  //     });
+  // }, []);
 
   
 
