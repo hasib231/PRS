@@ -15,7 +15,9 @@ const StoreManRoute = ({ children }) => {
   if (user && isStoreMan) {
     return children;
   }
-  return <Navigate to="/home" state={{ from: location }} replace></Navigate>;
+  return (
+    <Navigate to="/requisition" state={{ from: location }} replace></Navigate>
+  );
 };
 
 export default StoreManRoute;

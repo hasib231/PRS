@@ -4,7 +4,7 @@ import App from "./App.jsx";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import Home from "./Components/Home.jsx";
+import AddProduct from "./Components/AddProduct.jsx";
 import About from "./Components/About";
 import Signin from "./Components/Signin.jsx";
 import Profile from "./Components/Profile";
@@ -15,8 +15,10 @@ import AuthProvider from "./AuthContext/AuthProvider.jsx";
 import NavBar from "./Components/NavBar.jsx";
 import Admin from "./Components/Admin/Admin.jsx";
 import Requisition from "./Components/Requisition.jsx";
-
-
+import AdminRoute from './Routes/AdminRoute';
+import PrivateRoute from './Routes/PrivateRoute';
+import StoreManRoute from "./Routes/StoreManRoute.jsx";
+import EmployeeRoute from "./Routes/EmployeeRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -24,8 +26,12 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "/home",
-        element: <Home />,
+        path: "/addProduct",
+        element: (
+          <StoreManRoute>
+            <AddProduct />
+          </StoreManRoute>
+        ),
       },
       {
         path: "/profile",
@@ -49,7 +55,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/request",
-        element: <Request />,
+        element: (
+          <EmployeeRoute>
+            <Request />
+          </EmployeeRoute>
+        ),
       },
       {
         path: "/navbar",
@@ -57,13 +67,20 @@ const router = createBrowserRouter([
       },
       {
         path: "/admin",
-        element: <Admin></Admin>,
+        element: (
+          <AdminRoute>
+            <Admin></Admin>
+          </AdminRoute>
+        ),
       },
       {
         path: "/requisition",
-        element: <Requisition></Requisition>,
+        element: (
+          <PrivateRoute>
+            <Requisition></Requisition>
+          </PrivateRoute>
+        ),
       },
-
     ],
   },
 ]);

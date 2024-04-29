@@ -2,7 +2,6 @@ import { Navigate, useLocation } from "react-router";
 import useAuth from "./../hooks/useAuth";
 import useManager from "../hooks/useManager";
 
-
 const ManagerRoute = ({ children }) => {
   const { user, loading } = useAuth();
   const [isManager, isManagerLoading] = useManager();

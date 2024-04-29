@@ -3,11 +3,17 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import MovingComponent from "react-moving-text";
+import useAdmin from "./../hooks/useAdmin";
+import useStoreMan from "./../hooks/useStoreMan";
+import useEmployee from "../hooks/useEmployee";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  // const [isAdmin] = useAdmin();
+  // const [isStoreMan] = useStoreMan();
+  // const [isEmployee] = useEmployee();
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -48,7 +54,17 @@ const SignUp = () => {
                  showConfirmButton: false,
                  timer: 1500,
                });
-               navigate("/home");
+              //  if (isStoreMan) {
+              //    navigate( "/addProduct");
+              //  } else if (isEmployee) {
+              //    navigate( "/request");
+              //  } else if (isAdmin) {
+              //    navigate( "/admin");
+              //  } else {
+                 
+              //  }
+               navigate("/requisition");
+               
              }
            });
        })

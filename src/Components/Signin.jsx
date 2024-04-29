@@ -3,11 +3,18 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthContext/AuthProvider";
 import Swal from "sweetalert2";
 import MovingComponent from "react-moving-text";
+import useAdmin from "../hooks/useAdmin";
+import useStoreMan from "../hooks/useStoreMan";
+import useEmployee from "../hooks/useEmployee";
+
 
 const Signin = () => {
   const { signIn } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
+  // const [isAdmin] = useAdmin();
+  // const [isStoreMan] = useStoreMan();
+  // const [isEmployee] = useEmployee();
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -17,8 +24,19 @@ const Signin = () => {
     signIn(email, password)
       .then((result) => {
         // console.log(result.user)
+
         Swal.fire("Welcome!", "Logged in successfully", "success");
-        navigate(location?.state ? location.state : "/home");
+        // if (isStoreMan) {
+        //   navigate( "/addProduct");
+        // } else if (isEmployee) {
+        //   navigate( "/request");
+        // } else if (isAdmin) {
+        //   navigate( "/admin");
+        // }
+        // else {
+          
+        // }
+        navigate(location?.state ? location.state : "/requisition");
       })
       .catch((error) => {
         console.error(error);
@@ -28,20 +46,6 @@ const Signin = () => {
           text: `${error.message}`,
         });
       });
-
-    // const userInfo = { name, email }
-    // fetch('https://plan-a-plant-server.vercel.app/user', {
-    //   method: 'POST',
-    //   headers: {
-    //     'content-type': 'application/json'
-    //   },
-    //   body: JSON.stringify(userInfo)
-    // })
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     console.log(data)
-
-    //   })
 
     console.log(email, password);
   };

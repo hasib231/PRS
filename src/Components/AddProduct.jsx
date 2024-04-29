@@ -4,7 +4,7 @@ import NavBar from "./NavBar";
 import AllProductRow from "./AllProductRow";
 import Swal from "sweetalert2";
 
-const Home = () => {
+const AddProduct = () => {
   const [allProduct, setAllProduct] = useState([]);
 
   useEffect(() => {
@@ -20,6 +20,7 @@ const Home = () => {
     const quantity = form.quantity.value;
     const remarks = form.remarks.value;
     const description = form.description.value;
+    event.target.reset();
 
     const productData = {
       productName,
@@ -27,32 +28,28 @@ const Home = () => {
       remarks,
       description,
     };
-    // console.log(productData); 
-      fetch("http://localhost:5000/addProduct", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(productData),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.insertedId) {
-            
-            Swal.fire({
-              position: "top-center",
-              icon: "success",
-              title: "Product Added successfully",
-              showConfirmButton: false,
-              timer: 1500,             
-            });
-            
-          }
-          
-        });
+    // console.log(productData);
+    fetch("http://localhost:5000/addProduct", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(productData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire({
+            position: "top-center",
+            icon: "success",
+            title: "Product Added successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
   };
 
-  
   return (
     <>
       <NavBar />
@@ -142,11 +139,21 @@ const Home = () => {
               {/* head */}
               <thead>
                 <tr>
+                  {/* <th className="w-1/12">SN</th>
+                  <th className="w-2/12">Item Name</th>
+                  <th className="w-2/12">Item Quantity</th>
+                  <th className="w-2/12">Remarks</th>
+                  <th className="w-5/12">Description</th> */}
+                  {/* <th className="w-1/12"></th>
+                  <th className="w-1/12"></th> */}
+
                   <th>SN</th>
                   <th>Item Name</th>
                   <th>Item Quantity</th>
                   <th>Remarks</th>
-                  <th>Description</th>
+                  <th className="">
+                    Description
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -166,4 +173,6 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default AddProduct;
+
+// .

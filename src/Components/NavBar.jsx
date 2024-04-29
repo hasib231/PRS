@@ -3,13 +3,19 @@ import { Link, NavLink } from "react-router-dom";
 import MovingComponent from "react-moving-text";
 import logo from "../assets/logo.png";
 import { useState } from "react";
-import { AuthContext } from './../AuthContext/AuthProvider';
+import { AuthContext } from "./../AuthContext/AuthProvider";
 import Swal from "sweetalert2";
+import useAdmin from "./../hooks/useAdmin";
+import useStoreMan from "./../hooks/useStoreMan";
+import useEmployee from "../hooks/useEmployee";
 
 const NavBar = () => {
   const [open, setOpen] = useState(true);
   const { user, logOut } = useContext(AuthContext);
   const [userRole, setUserRole] = useState("");
+  const [isAdmin] = useAdmin();
+  const [isStoreMan] = useStoreMan();
+  const [isEmployee] = useEmployee();
 
   const handleLogOut = () => {
     logOut()
@@ -17,24 +23,6 @@ const NavBar = () => {
       .catch((error) => console.log(error));
   };
 
-  // useEffect(() => {
-  //   fetch(`http://localhost:5000/checkUser/${user?.email}`)
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error(`HTTP error! status: ${response.status}`);
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       const { role } = data;
-  //       setUserRole(role);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching user role:", error);
-  //     });
-  // }, []);
-
-  
 
   return (
     <div className="fixed w-full ">
@@ -136,16 +124,18 @@ const NavBar = () => {
         </div>
         <div className="navbar-center hidden lg:flex bg-white px-12 rounded-[2rem]">
           <ul className="menu menu-horizontal px-1 text-[15px] space-x-4">
-            <li>
-              <NavLink
-                to="/home"
-                className={({ isActive, isPending }) =>
-                  isActive ? "border-b-[2px]" : isPending ? "pending" : ""
-                }
-              >
-                Dashboard
-              </NavLink>
-            </li>
+            {isStoreMan && (
+              <li>
+                <NavLink
+                  to="/addProduct"
+                  className={({ isActive, isPending }) =>
+                    isActive ? "border-b-[2px]" : isPending ? "pending" : ""
+                  }
+                >
+                  Add Product
+                </NavLink>
+              </li>
+            )}
             <li>
               <NavLink
                 to="/requisition"
@@ -156,26 +146,30 @@ const NavBar = () => {
                 Requisition
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to="/request"
-                className={({ isActive, isPending }) =>
-                  isActive ? "border-b-[1px]" : isPending ? "pending" : ""
-                }
-              >
-                Request
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/admin"
-                className={({ isActive, isPending }) =>
-                  isActive ? "border-b-[1px]" : isPending ? "pending" : ""
-                }
-              >
-                Admin Panel
-              </NavLink>
-            </li>
+            {isEmployee && (
+              <li>
+                <NavLink
+                  to="/request"
+                  className={({ isActive, isPending }) =>
+                    isActive ? "border-b-[1px]" : isPending ? "pending" : ""
+                  }
+                >
+                  Request
+                </NavLink>
+              </li>
+            )}
+            {isAdmin && (
+              <li>
+                <NavLink
+                  to="/admin"
+                  className={({ isActive, isPending }) =>
+                    isActive ? "border-b-[1px]" : isPending ? "pending" : ""
+                  }
+                >
+                  Admin Panel
+                </NavLink>
+              </li>
+            )}
           </ul>
         </div>
         <div className="navbar-end">
@@ -202,7 +196,7 @@ const NavBar = () => {
           )}
         </div>
       </div>
-      <div>{ userRole}</div>
+      <div>{userRole}</div>
     </div>
   );
 };

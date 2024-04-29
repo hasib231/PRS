@@ -65,12 +65,21 @@ const UserProductRow = ({ product, index }) => {
 
   return (
     <tr>
-      <td className="w-1/12">{index + 1}</td>
+      {/* <td className="w-1/12">{index + 1}</td>
       <td className="w-2/12">{productName}</td>
       <td className="w-2/12">{quantity}</td>
       <td className="w-2/12">{remarks}</td>
       <td className="w-4/12 text-justify">{description}</td>
-      <td className="w-1/12">
+      <td className="w-1/12"> */}
+
+        <td className="">{index + 1}</td>
+      <td className="">{productName}</td>
+      <td className="">{quantity}</td>
+      <td className="">{remarks}</td>
+      <td className=" text-justify">{description}</td>
+      <td className="">
+
+        
         {/* <button
           className="btn hover:shadow-form rounded-md bg-gray-800 py-3 px-8 text-center text-sm font-semibold text-white outline-none ms-20"
           onClick={() => openModal(_id)} // Use the _id to create a unique ID for the modal
@@ -193,7 +202,7 @@ const UserProductRow = ({ product, index }) => {
                 // }}
               />
             </div>
-            
+
             <div className="modal-action">
               <label
                 htmlFor={_id}
