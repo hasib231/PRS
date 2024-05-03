@@ -18,14 +18,14 @@ const AddProduct = () => {
     const form = event.target;
     const productName = form.productName.value;
     const quantity = form.quantity.value;
-    const remarks = form.remarks.value;
+    const unit = form.unit.value;
     const description = form.description.value;
     event.target.reset();
 
     const productData = {
       productName,
       quantity,
-      remarks,
+      unit,
       description,
     };
     // console.log(productData);
@@ -78,6 +78,7 @@ const AddProduct = () => {
                 type="text"
                 name="productName"
                 placeholder="Product Name"
+                required
                 className="input input-bordered  w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-sm font-small text-[#6B7280] outline-none focus:border-green-500 focus:shadow-md"
               />
             </div>
@@ -91,7 +92,7 @@ const AddProduct = () => {
               <input
                 type="number"
                 name="quantity"
-                defaultValue=""
+                required
                 placeholder="Product Quantity"
                 className="input input-bordered  w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-sm font-small text-[#6B7280] outline-none focus:border-green-500 focus:shadow-md"
               />
@@ -99,14 +100,15 @@ const AddProduct = () => {
             <div className="form-control">
               <label className="label">
                 <span className="label-text block text-sm font-medium text-gray-700 mt-2">
-                  Remarks
+                  Unit
                 </span>
               </label>
               <input
                 type="text"
-                name="remarks"
+                name="unit"
                 defaultValue=""
-                placeholder="Remarks"
+                required
+                placeholder="Unit"
                 className="input input-bordered  w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-sm font-small text-[#6B7280] outline-none focus:border-green-500 focus:shadow-md"
               />
             </div>
@@ -119,6 +121,7 @@ const AddProduct = () => {
               </label>
               <textarea
                 name="description"
+                required
                 className="textarea textarea-bordered w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-sm font-small text-[#6B7280] outline-none focus:border-green-500 focus:shadow-md"
                 placeholder="Write the product description"
               ></textarea>
@@ -138,22 +141,24 @@ const AddProduct = () => {
             <table className="table border ">
               {/* head */}
               <thead>
-                <tr>
-                  {/* <th className="w-1/12">SN</th>
+                <tr className="text-center">
+                  <th className="w-1/12">SN</th>
                   <th className="w-2/12">Item Name</th>
                   <th className="w-2/12">Item Quantity</th>
-                  <th className="w-2/12">Remarks</th>
-                  <th className="w-5/12">Description</th> */}
-                  {/* <th className="w-1/12"></th>
-                  <th className="w-1/12"></th> */}
+                  <th className="w-2/12">Unit</th>
+                  <th className="w-3/12">Description</th>
+                  <th className="w-1/12"></th>
+                  <th className="w-1/12"></th>
 
-                  <th>SN</th>
+                  {/* <th>SN</th>
                   <th>Item Name</th>
                   <th>Item Quantity</th>
                   <th>Remarks</th>
                   <th className="">
                     Description
                   </th>
+                  <th></th>
+                  <th></th> */}
                 </tr>
               </thead>
               <tbody>

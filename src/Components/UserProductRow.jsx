@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 
 
 const UserProductRow = ({ product, index }) => {
-  const { _id, productName, quantity, remarks, description } = product;
+  const { _id, productName, quantity, unit, description } = product;
   const {user} = useContext(AuthContext)
 
   // Function to open the modal with a dynamic ID
@@ -21,11 +21,12 @@ const UserProductRow = ({ product, index }) => {
     const requestQuantity = form.requestQuantity.value;
     const unit = form.unit.value;
     const unitPrice = form.unitPrice.value;
-    const totalPrice = form.totalPrice.value;
+    const remarks = form.remarks.value;
     
     const userName = user?.displayName;
     const userEmail = user?.email;
     const date = new Date().toLocaleDateString();
+    const totalPrice = unitPrice * requestQuantity;
     const productData = {
       userName,
       userEmail,
@@ -38,7 +39,7 @@ const UserProductRow = ({ product, index }) => {
       requestQuantity,
       totalPrice,
       status: "Requested",
-      prNo: ""
+      prNo: "",
     };
     console.log(productData);
    
@@ -72,14 +73,12 @@ const UserProductRow = ({ product, index }) => {
       <td className="w-4/12 text-justify">{description}</td>
       <td className="w-1/12"> */}
 
-        <td className="">{index + 1}</td>
+      <td className="">{index + 1}</td>
       <td className="">{productName}</td>
       <td className="">{quantity}</td>
-      <td className="">{remarks}</td>
+      <td className="">{unit}</td>
       <td className=" text-justify">{description}</td>
       <td className="">
-
-        
         {/* <button
           className="btn hover:shadow-form rounded-md bg-gray-800 py-3 px-8 text-center text-sm font-semibold text-white outline-none ms-20"
           onClick={() => openModal(_id)} // Use the _id to create a unique ID for the modal
@@ -131,6 +130,23 @@ const UserProductRow = ({ product, index }) => {
                 className="input input-bordered  w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-sm font-small text-[#6B7280] outline-none focus:border-green-500 focus:shadow-md"
               />
             </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text block text-sm font-medium text-gray-700 mt-2">
+                  Unit
+                </span>
+              </label>
+              <input
+                type="text"
+                name="unit"
+                defaultValue={unit}
+                disabled
+                placeholder="Unit"
+                className="input input-bordered  w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-sm font-small text-[#6B7280] outline-none focus:border-green-500 focus:shadow-md"
+              />
+            </div>
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text block text-sm font-medium text-gray-700 mt-2">
@@ -142,21 +158,6 @@ const UserProductRow = ({ product, index }) => {
                 name="requestQuantity"
                 defaultValue=""
                 placeholder="Request Quantity"
-                className="input input-bordered  w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-sm font-small text-[#6B7280] outline-none focus:border-green-500 focus:shadow-md"
-              />
-            </div>
-
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text block text-sm font-medium text-gray-700 mt-2">
-                  Unit
-                </span>
-              </label>
-              <input
-                type="number"
-                name="unit"
-                defaultValue=""
-                placeholder="Unit"
                 className="input input-bordered  w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-sm font-small text-[#6B7280] outline-none focus:border-green-500 focus:shadow-md"
               />
             </div>
@@ -179,14 +180,14 @@ const UserProductRow = ({ product, index }) => {
             <div className="form-control">
               <label className="label">
                 <span className="label-text block text-sm font-medium text-gray-700 mt-2">
-                  Total Price
+                  Remarks
                 </span>
               </label>
               <input
-                type="number"
-                name="totalPrice"
+                type="text"
+                name="remarks"
                 defaultValue=""
-                placeholder="Total Price"
+                placeholder="Remarks"
                 className="input input-bordered  w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-sm font-small text-[#6B7280] outline-none focus:border-green-500 focus:shadow-md"
               />
             </div>

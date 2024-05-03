@@ -36,7 +36,7 @@ const Request = () => {
                   <th className="w-1/12">SN</th>
                   <th className="w-2/12">Item Name</th>
                   <th className="w-2/12">Item Quantity</th>
-                  <th className="w-2/12">Remarks</th>
+                  <th className="w-2/12">Unit</th>
                   <th className="w-4/12 text-justify">
                     Description
                   </th>

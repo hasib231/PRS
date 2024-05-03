@@ -1,32 +1,178 @@
 import React from 'react';
+import { FaRegEdit } from "react-icons/fa";
+import { RiDeleteBinLine } from "react-icons/ri";
+import Swal from 'sweetalert2';
 
 const AllProductRow = ({ product,index }) => {
-    const { _id, productName, quantity, remarks, description } = product;
+  const { _id, productName, quantity, unit, description } = product;
+
+  const handleEdit = (event,product) => {
+    event.preventDefault();
+    const form = event.target;
+    const productName = form.productName.value;
+    const quantity = form.quantity.value;
+    const unit = form.unit.value;
+    const description = form.description.value;
+
+    const productEditData = {
+      productName,
+      quantity,
+      unit,
+      description,
+    };
+    fetch(
+      `https://summer-camp-school-server-side-hasib231.vercel.app/users/admin/${user._id}`,
+      {
+        method: "PATCH",
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount) {
+          refetch();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `${user.name} is an Admin Now!`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      });
+  };
+  
+  const handleDelete = (_id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/deleteProduct/${_id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              Swal.fire("Deleted!", "Your product has been deleted.", "success");
+            }
+          });
+      }
+    });
+  };
     return (
       <tr>
         <td className="w-1/12">{index + 1}</td>
         <td className="w-2/12">{productName}</td>
-        <td className="w-2/12">{quantity}</td>
-        <td className="w-2/12">{remarks}</td>
-        <td className="w-5/12 text-justify">{description}</td>
+        <td className="w-2/12 text-center">{quantity}</td>
+        <td className="w-2/12">{unit}</td>
+        <td className="w-4/12 text-justify">{description}</td>
 
-        {/* <td className="">{index + 1}</td>
-        <td className="">{productName}</td>
-        <td className="">{quantity}</td>
-        <td className="">{remarks}</td>
-        <td className="w-10 ">
-          {description}
-        </td> */}
-        {/* <td className="w-1/12">
-          <button className="btn hover:shadow-form rounded-md bg-gray-800 py-3 px-8 text-center text-sm font-semibold text-white outline-none ms-20">
-            Update
-          </button>
-        </td>
-        <td className="w-1/12">
-          <button className="btn hover:shadow-form rounded-md bg-gray-800 py-3 px-8 text-center text-sm font-semibold text-white outline-none ms-20">
-            Delete
-          </button>
-        </td> */}
+        <div className="w-1/12">
+          <td className="">
+            <label htmlFor={_id}>
+              <FaRegEdit size={"15px"} />
+            </label>
+          </td>
+          <td className="">
+            <button onClick={() => handleDelete(_id)}>
+              <RiDeleteBinLine size={"15px"} />
+            </button>
+          </td>
+        </div>
+
+        <input type="checkbox" id={_id} className="modal-toggle" />
+        <div className="modal">
+          {" "}
+          <div className="modal-box">
+            <form onSubmit={handleEdit}>
+              <div className="form-control ">
+                <label className="label">
+                  <span className="label-text block text-sm font-medium text-gray-700 mt-2">
+                    Product Name
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  name="productName"
+                  placeholder="Product Name"
+                  defaultValue={productName}
+                  required
+                  className="input input-bordered  w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-sm font-small text-[#6B7280] outline-none focus:border-green-500 focus:shadow-md"
+                />
+              </div>
+
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text block text-sm font-medium text-gray-700 mt-2">
+                    Product Quantity
+                  </span>
+                </label>
+                <input
+                  type="number"
+                  name="quantity"
+                  required
+                  defaultValue={quantity}
+                  placeholder="Product Quantity"
+                  className="input input-bordered  w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-sm font-small text-[#6B7280] outline-none focus:border-green-500 focus:shadow-md"
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text block text-sm font-medium text-gray-700 mt-2">
+                    Unit
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  name="unit"
+                  defaultValue={unit}
+                  required
+                  placeholder="Unit"
+                  className="input input-bordered  w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-sm font-small text-[#6B7280] outline-none focus:border-green-500 focus:shadow-md"
+                />
+              </div>
+
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text block text-sm font-medium text-gray-700 mt-2">
+                    Description
+                  </span>
+                </label>
+                <textarea
+                  name="description"
+                  required
+                  defaultValue={description}
+                  className="textarea textarea-bordered w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-sm font-small text-[#6B7280] outline-none focus:border-green-500 focus:shadow-md"
+                  placeholder="Write the product description"
+                ></textarea>
+              </div>
+
+              <div className="form-control mt-8">
+                <input
+                  className="btn bg-gray-800 text-white btn-block"
+                  type="submit"
+                  value="Update"
+                  
+                />
+              </div>
+
+              <div className="modal-action">
+                <label
+                  htmlFor={_id}
+                  className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                >
+                  ✕
+                </label>
+              </div>
+            </form>
+          </div>
+        </div>
       </tr>
     );
 };

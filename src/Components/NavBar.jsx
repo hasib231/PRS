@@ -25,8 +25,8 @@ const NavBar = () => {
 
 
   return (
-    <div className="fixed w-full ">
-      <div className="navbar bg-[#FAFAFA]">
+    <div className="fixed w-full bg-[#FAFAFA] z-[1]">
+      <div className="navbar ">
         <div className="navbar-start">
           <div className="dropdown">
             <div
@@ -122,7 +122,7 @@ const NavBar = () => {
             </div>
           </Link>
         </div>
-        <div className="navbar-center hidden lg:flex bg-white px-12 rounded-[2rem]">
+        <div className="navbar-center hidden lg:flex bg-white px-12 rounded-[2rem] ">
           <ul className="menu menu-horizontal px-1 text-[15px] space-x-4">
             {isStoreMan && (
               <li>
