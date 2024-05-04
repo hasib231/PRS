@@ -137,16 +137,28 @@ const NavBar = () => {
               </NavLink>
             </li>
             {isStoreMan && (
-              <li>
-                <NavLink
-                  to="/addProduct"
-                  className={({ isActive, isPending }) =>
-                    isActive ? "border-b-[2px]" : isPending ? "pending" : ""
-                  }
-                >
-                  Add Product
-                </NavLink>
-              </li>
+              <>
+                <li>
+                  <NavLink
+                    to="/addProduct"
+                    className={({ isActive, isPending }) =>
+                      isActive ? "border-b-[2px]" : isPending ? "pending" : ""
+                    }
+                  >
+                    Add Product
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/addPr"
+                    className={({ isActive, isPending }) =>
+                      isActive ? "border-b-[2px]" : isPending ? "pending" : ""
+                    }
+                  >
+                    Add PR
+                  </NavLink>
+                </li>
+              </>
             )}
             {isManager && (
               <li>
@@ -161,16 +173,28 @@ const NavBar = () => {
               </li>
             )}
             {isEmployee && (
-              <li>
-                <NavLink
-                  to="/request"
-                  className={({ isActive, isPending }) =>
-                    isActive ? "border-b-[1px]" : isPending ? "pending" : ""
-                  }
-                >
-                  Request
-                </NavLink>
-              </li>
+              <>
+                <li>
+                  <NavLink
+                    to="/request"
+                    className={({ isActive, isPending }) =>
+                      isActive ? "border-b-[1px]" : isPending ? "pending" : ""
+                    }
+                  >
+                    Request
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/myRequest"
+                    className={({ isActive, isPending }) =>
+                      isActive ? "border-b-[1px]" : isPending ? "pending" : ""
+                    }
+                  >
+                    My Request
+                  </NavLink>
+                </li>
+              </>
             )}
             {isAdmin && (
               <li>

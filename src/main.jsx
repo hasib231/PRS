@@ -19,6 +19,8 @@ import StoreManRoute from "./Routes/StoreManRoute.jsx";
 import EmployeeRoute from "./Routes/EmployeeRoute.jsx";
 import ManagerRoute from './Routes/ManagerRoute';
 import Home from "./Components/Home.jsx";
+import AddPr from "./Components/Storeman/AddPr.jsx";
+import MyRequest from "./Components/User/MyRequest.jsx";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +32,14 @@ const router = createBrowserRouter([
         element: (
           <StoreManRoute>
             <AddProduct />
+          </StoreManRoute>
+        ),
+      },
+      {
+        path: "/addPr",
+        element: (
+          <StoreManRoute>
+            <AddPr></AddPr>
           </StoreManRoute>
         ),
       },
@@ -50,10 +60,18 @@ const router = createBrowserRouter([
         element: <SignUp />,
       },
       {
+        path: "/myRequest",
+        element: (
+          <EmployeeRoute>
+            <MyRequest></MyRequest>
+          </EmployeeRoute>
+        ),
+      },
+      {
         path: "/request",
         element: (
           <EmployeeRoute>
-            <Request />
+            <Request></Request>
           </EmployeeRoute>
         ),
       },
