@@ -1,12 +1,11 @@
 import React from "react";
 import { PaperClipIcon } from "@heroicons/react/20/solid";
-import Header from "./Header";
 import MovingComponent from "react-moving-text";
 
 const Profile = () => {
   return (
     <div>
-      <Header />
+    
       <div className="sm:px-40 md:px-45 lg:px-50 xl:px-55">
         <div className="px-4 sm:px-0 ">
           <MovingComponent

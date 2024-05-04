@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import useAdmin from "./../hooks/useAdmin";
 import useStoreMan from "./../hooks/useStoreMan";
 import useEmployee from "../hooks/useEmployee";
+import useManager from "../hooks/useManager";
 
 const NavBar = () => {
   const [open, setOpen] = useState(true);
@@ -16,6 +17,7 @@ const NavBar = () => {
   const [isAdmin] = useAdmin();
   const [isStoreMan] = useStoreMan();
   const [isEmployee] = useEmployee();
+  const [isManager] = useManager();
 
   const handleLogOut = () => {
     logOut()
@@ -124,6 +126,16 @@ const NavBar = () => {
         </div>
         <div className="navbar-center hidden lg:flex bg-white px-12 rounded-[2rem] ">
           <ul className="menu menu-horizontal px-1 text-[15px] space-x-4">
+            <li>
+              <NavLink
+                to="/home"
+                className={({ isActive, isPending }) =>
+                  isActive ? "border-b-[2px]" : isPending ? "pending" : ""
+                }
+              >
+                Home
+              </NavLink>
+            </li>
             {isStoreMan && (
               <li>
                 <NavLink
@@ -136,16 +148,18 @@ const NavBar = () => {
                 </NavLink>
               </li>
             )}
-            <li>
-              <NavLink
-                to="/requisition"
-                className={({ isActive, isPending }) =>
-                  isActive ? "border-b-[1px]" : isPending ? "pending" : ""
-                }
-              >
-                Requisition
-              </NavLink>
-            </li>
+            {isManager && (
+              <li>
+                <NavLink
+                  to="/requisition"
+                  className={({ isActive, isPending }) =>
+                    isActive ? "border-b-[1px]" : isPending ? "pending" : ""
+                  }
+                >
+                  Requisition
+                </NavLink>
+              </li>
+            )}
             {isEmployee && (
               <li>
                 <NavLink

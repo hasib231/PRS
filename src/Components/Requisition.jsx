@@ -4,16 +4,13 @@ import NavBar from "./NavBar";
 import AllProductRow from "./AllProductRow";
 import Swal from "sweetalert2";
 import RequisitionRow from "./RequisitionRow";
+import useRequestedProduct from "../hooks/useRequestedProduct";
 
 const Requisition = () => {
-  const [requestedProduct, setRequestedProduct] = useState([]);
+  
+  const [requestedProduct, refetch] = useRequestedProduct([]);
+  
 
-  useEffect(() => {
-    fetch("http://localhost:5000/allRequestProduct")
-      .then((res) => res.json())
-      .then((data) => setRequestedProduct(data));
-  }, []);
-  console.log(requestedProduct);
   return (
     <>
       <NavBar />
@@ -46,7 +43,6 @@ const Requisition = () => {
                 <th>Total Price</th>
                 <th>Remarks</th>
                 <th>Status</th>
-                <th>PR No</th>
               </tr>
             </thead>
             <tbody>
@@ -55,6 +51,7 @@ const Requisition = () => {
                   key={product._id}
                   product={product}
                   index={index}
+                  refetch={refetch}
                 ></RequisitionRow>
               ))}
             </tbody>

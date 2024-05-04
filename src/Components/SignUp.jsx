@@ -6,6 +6,7 @@ import MovingComponent from "react-moving-text";
 import useAdmin from "./../hooks/useAdmin";
 import useStoreMan from "./../hooks/useStoreMan";
 import useEmployee from "../hooks/useEmployee";
+import useManager from "../hooks/useManager";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
@@ -14,6 +15,7 @@ const SignUp = () => {
   // const [isAdmin] = useAdmin();
   // const [isStoreMan] = useStoreMan();
   // const [isEmployee] = useEmployee();
+  // const [isManager] = useManager();
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -54,19 +56,21 @@ const SignUp = () => {
                  showConfirmButton: false,
                  timer: 1500,
                });
-              //  if (isStoreMan) {
-              //    navigate( "/addProduct");
-              //  } else if (isEmployee) {
-              //    navigate( "/request");
-              //  } else if (isAdmin) {
-              //    navigate( "/admin");
-              //  } else {
-                 
-              //  }
-               navigate("/requisition");
+               navigate("/home");
+              // if (isStoreMan) {
+              //   navigate("/addProduct");
+              // } else if (isEmployee) {
+              //   navigate("/request");
+              // } else if (isAdmin) {
+              //   navigate("/admin");
+              // } else if (isManager) {
+              //   navigate("/requisition");
+              // }
                
              }
            });
+         
+         
        })
        .catch((error) => {
          console.log(error);

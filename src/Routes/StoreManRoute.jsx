@@ -16,7 +16,7 @@ const StoreManRoute = ({ children }) => {
     return children;
   }
   return (
-    <Navigate to="/requisition" state={{ from: location }} replace></Navigate>
+    <Navigate to="/home" ></Navigate>
   );
 };
 

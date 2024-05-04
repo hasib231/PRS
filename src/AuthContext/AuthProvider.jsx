@@ -38,28 +38,40 @@ const AuthProvider = ({children}) => {
         return signOut(auth)
     }
     
-    useEffect(() => {
-      const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-        setUser(currentUser);
-        console.log("current user", currentUser);
+    // useEffect(() => {
+    //   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    //     setUser(currentUser);
+    //     console.log("current user", currentUser);
 
-        // get and set token
-        if (currentUser) {
-          axios
-            .post("http://localhost:5000/jwt", { email: currentUser.email })
-            .then((data) => {
-              // console.log(data.data.token)
-              localStorage.setItem("access-token", data.data.token);
-              setLoading(false);
-            });
-        } else {
-          localStorage.removeItem("access-token");
-        }
-      });
-      return () => {
-        return unsubscribe();
-      };
-    }, []);
+    //     // get and set token
+    //     if (currentUser) {
+    //       axios
+    //         .post("http://localhost:5000/jwt", { email: currentUser.email })
+    //         .then((data) => {
+    //           // console.log(data.data.token)
+    //           localStorage.setItem("access-token", data.data.token);
+    //           setLoading(false);
+    //         });
+    //     } else {
+    //       localStorage.removeItem("access-token");
+    //     }
+    //   });
+    //   return () => {
+    //     return unsubscribe();
+    //   };
+  // }, []);
+  
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (loggedUser) => {
+      console.log("logged in user inside auth state observer", loggedUser);
+      setUser(loggedUser);
+      setLoading(false);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
 
 

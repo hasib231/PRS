@@ -157,6 +157,7 @@ const UserProductRow = ({ product, index }) => {
                 type="number"
                 name="requestQuantity"
                 defaultValue=""
+                required
                 placeholder="Request Quantity"
                 className="input input-bordered  w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-sm font-small text-[#6B7280] outline-none focus:border-green-500 focus:shadow-md"
               />
@@ -171,6 +172,7 @@ const UserProductRow = ({ product, index }) => {
               <input
                 type="number"
                 name="unitPrice"
+                required
                 defaultValue=""
                 placeholder="Unit Price"
                 className="input input-bordered  w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-sm font-small text-[#6B7280] outline-none focus:border-green-500 focus:shadow-md"
@@ -187,6 +189,7 @@ const UserProductRow = ({ product, index }) => {
                 type="text"
                 name="remarks"
                 defaultValue=""
+                required
                 placeholder="Remarks"
                 className="input input-bordered  w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-sm font-small text-[#6B7280] outline-none focus:border-green-500 focus:shadow-md"
               />
