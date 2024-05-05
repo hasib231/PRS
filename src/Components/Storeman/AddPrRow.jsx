@@ -15,14 +15,15 @@ const AddPrRow = ({ product, index, refetch }) => {
     unitPrice,
     userEmail,
       userName,
-    status,
+      status,
+    prNo,
   } = product;
  const handleAddPr = (event) => {
    event.preventDefault();
    const form = event.target;
 //    const add_id = form.id.value;
    const prNo = form.prNo.value;
-   
+    event.target.reset();
 
    const prData = {
      prNo,
@@ -67,7 +68,8 @@ const AddPrRow = ({ product, index, refetch }) => {
       <td>{unitPrice}</td>
       <td>{totalPrice}</td>
       <td>{remarks}</td>
-      <td>{status}</td>
+          <td>{status}</td>
+          <td>{ prNo}</td>
       <td>
         <form onSubmit={handleAddPr}>
           <div className="flex items-center">
@@ -75,8 +77,8 @@ const AddPrRow = ({ product, index, refetch }) => {
               <input
                 type="text"
                 name="prNo"
-                placeholder="PR No"
-                required
+                placeholder="Add PR No"
+                // required
                 className="input input-bordered  w-full rounded-md border border-[#e0e0e0] bg-white  text-sm font-small text-[#6B7280] outline-none focus:border-green-500 focus:shadow-md"
               />
             </div>
